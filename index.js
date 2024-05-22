@@ -1,12 +1,16 @@
 const express  = require ('express');
-require('dotenv').config();
 
-const mongoose = require('mongoose');
+const {dbConnection}=require('./config/config.js')
 
 const app = express();
 
-app.get('/', routes);
+const router=require('./routes/routes.js');
 
+app.use(express.json());
+
+app.use('/', router);
+
+dbConnection();
 
 app.listen(3000, ()=>{
     console.log('Servidor escuchando en el puerto 3000');
